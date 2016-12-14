@@ -22,7 +22,7 @@ extension Position {
 // all subsequent functions will follow. 
 // A tradeoff here, is that it is hard to actually draw the Region. Could by done by
 // systematically querrying it for all points in a coordinates system, and draw those for which
-// the R
+// the Region returns true
 typealias Region = (Position) -> Bool
 
 func circle(radius: Distance) -> Region {
