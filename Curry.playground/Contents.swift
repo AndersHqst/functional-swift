@@ -7,4 +7,3 @@ func foo(x: Int, y: Int) -> Int {
 }
 
 curry(f: foo)(2)(3)
-
