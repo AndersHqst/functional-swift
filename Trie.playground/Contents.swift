@@ -92,7 +92,7 @@ extension Trie {
         } else {
             children[head] = Trie(tail)
         }
-        return Trie(isElement: false, children: children)
+        return Trie(isElement: isElement, children: children)
     }
 }
 
@@ -100,3 +100,34 @@ var b = Trie(["f", "o", "o"])
 print(b.autoComplete(key: ["f"]))
 b.insert(["f", "o", "g"])
 print(b.autoComplete(key: ["f"]))
+
+
+func buildStringTrie(_ words: [String]) -> Trie<Character> {
+    let initalTrie = Trie<Character>()
+    return words.reduce(initalTrie) {
+        trie, word in
+        var t = trie
+        return t.insert(Array(word.characters))
+    }
+}
+
+var stringTrie = buildStringTrie(["anders", "andrik"])
+for suggestion in stringTrie.autoComplete(key: Array("and".characters)) {
+    print(suggestion)
+}
+
+
+func autoCompleteString(trie: Trie<Character>, word: String) -> [String] {
+    let chars = Array(word.characters)
+    let completed = trie.autoComplete(key: chars)
+    return completed.map {
+        chars in
+        word + String(chars)
+    }
+}
+
+let contents = ["cat", "car", "cars", "dog"]
+let trieOfWords = buildStringTrie(contents)
+autoCompleteString(trie: trieOfWords, word: "c")
+
+
